@@ -1,0 +1,25 @@
+#######################################
+# Syntax Coloring Map For UART_LINK
+#######################################
+# Class
+#######################################
+
+CUartLink	KEYWORD1
+
+#######################################
+# Methods and Functions
+#######################################
+bBegin	KEYWORD2
+vEnd	KEYWORD2
+vSetTxData	KEYWORD2
+bGetRxData	KEYWORD2
+bIsLinkAlive	KEYWORD2
+u32GetCrcErrors	KEYWORD2
+
+#######################################
+# Constants
+#######################################
+SYNC1	LITERAL1
+SYNC2	LITERAL1
+UART_BUF_SIZE	LITERAL1
+STOP_TIMEOUT_MS	LITERAL1
