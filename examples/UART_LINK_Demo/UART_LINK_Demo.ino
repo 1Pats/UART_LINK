@@ -1,12 +1,14 @@
 #include <UART_LINK.h>
 
 // 1. Define your custom data structure (must be trivially copyable)
-struct MyData {
+//    Fixed-width types + packed = identical 14-byte layout on ESP32 and AVR (UNO)
+struct __attribute__((packed)) MyData {
     float fTelemetryX;
     float fTelemetryY;
     uint32_t u32StatusFlags;
     int16_t i16MotorSpeed;
 };
+static_assert(sizeof(MyData) == 14, "MyData must be 14 bytes on both boards");
 
 // 2. Instantiate the link with your specific data structure type
 CUartLink<MyData> Link;
@@ -15,6 +17,7 @@ void setup() {
     Serial.begin(115200); // Serial monitor for debug output
     
     // Initialize the link: Serial2, 115200 baud, RX=16, TX=17, 20ms period
+    // (talking to an Arduino UNO? use Link.bBegin(Serial2, 38400, 16, 17, 100) to match UART_LINK_Uno)
     if (Link.bBegin(Serial2, 115200, 16, 17, 20)) {
         Serial.println("UART Link background task spawned successfully!");
     } else {
